@@ -38,6 +38,17 @@
     animation: enable 0.3s linear;
 }
 
+.Clear {
+    cursor: pointer;
+    padding: 0px 10px;
+    color: darkred;
+}
+
+.ClearButton {
+   height: 20px;
+}
+
+
 @keyframes enable {
     0% {
         transform: scale(1);
@@ -49,3 +60,4 @@
         transform: scale(1);
     }
 }
+

@@ -79,6 +79,20 @@ class BurgerBuilder extends Component {
         alert('you continue!');
     }
 
+    clearIngredientsHandler = () => {
+        this.setState({
+            ingredients: {
+                salad: 0,
+                bacon: 0,
+                cheese: 0,
+                meat: 0
+            },
+            totalPrice: 4,
+            purchasable: false,
+            purchasing: false
+        })
+    }
+
     render() {
         const disabledInfo = {
             ...this.state.ingredients
@@ -105,7 +119,8 @@ class BurgerBuilder extends Component {
                 disabled={disabledInfo}
                 price={this.state.totalPrice}
                 purchasable={this.state.purchasable}
-                ordered={this.purchaseHandler}/>
+                ordered={this.purchaseHandler}
+                cleared={this.clearIngredientsHandler}/>
             </Aux>
         );
     }
