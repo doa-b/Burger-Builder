@@ -72,7 +72,7 @@ class BurgerBuilder extends Component {
                         price={this.props.price}
                         purchasable={this.updatePurchaseState(this.props.ings)}
                         ordered={this.purchaseHandler}
-                        cleared={this.props.onAllIngriedentsRemoved}/>
+                        cleared={this.props.onInitIngredients}/>
                 </Aux>);
 
             orderSummary = <OrderSummary
@@ -104,7 +104,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
       onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
       onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
-      onAllIngriedentsRemoved: () => dispatch(actions.removeAllIngredients()),
       onInitIngredients: () => dispatch(actions.initIngredients()),
       onInitPurchase: () => dispatch(actions.purchaseInit())
   }

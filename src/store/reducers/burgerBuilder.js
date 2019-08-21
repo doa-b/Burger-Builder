@@ -33,30 +33,6 @@ const burgerBuilder = (state = initialState, action) => {
                 totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName] };
             return updateObject(state, updatedSt);
 
-        case actionTypes.REMOVE_ALL_INGREDIENTS:
-            return updateObject(state, {
-                ingredients: {
-                    ...state.ingredients,
-                    salad: 0,
-                    bacon: 0,
-                    cheese: 0,
-                    meat: 0
-                },
-                totalPrice: 4
-            });
-
-            return {
-                ...state, // does not create deep clones
-                ingredients: {
-                    ...state.ingredients,
-                    salad: 0,
-                    bacon: 0,
-                    cheese: 0,
-                    meat: 0
-                },
-                totalPrice: 4
-            };
-
         case actionTypes.SET_INGREDIENTS:
             return updateObject(state, {
                 ingredients: {
