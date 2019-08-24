@@ -114,12 +114,13 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ings,
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         };
 
         console.log(order);
 
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
     };
 
     checkValidity = (value, rules) => {
@@ -179,16 +180,16 @@ class ContactData extends Component {
 
         let form = (
             <form onSubmit={this.orderHandler}>
-                {formElementsArray.map(formelement => (
+                {formElementsArray.map(formElement => (
                     <Input
-                        key={formelement.id}
-                        elementType={formelement.config.elementType}
-                        elementConfig={formelement.config.elementConfig}
-                        value={formelement.config.value}
-                        changed={(event) => this.inputChangedHandler(event, formelement.id)}
-                        invalid={!formelement.config.valid}
-                        shouldValidate={formelement.config.validation}
-                        touched={formelement.config.touched}
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
                     />
                 ))}
                 <Button btnType={"Success"} disabled={!this.state.formIsValid}>ORDER</Button>
@@ -210,13 +211,15 @@ const mapStateToProps = (state) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.idToken,
+        userId: state.auth.userId
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     }};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
