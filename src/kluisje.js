@@ -1,0 +1,1 @@
+export const VUUR = 'AIzaSyBFHJdeQ27mF2y082kQuv3PVcniaE6fh2Q'
