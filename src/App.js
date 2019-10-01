@@ -22,6 +22,10 @@ const asyncAuth = asyncComponent(() => {
     return import ('./containers/Auth/Auth');
 });
 
+const asyncOrderDetails = asyncComponent(() => {
+    return import ('./containers/Orders/OrderDetails/OrderDetails');
+});
+
 class App extends Component {
 
     componentDidMount() {
@@ -41,6 +45,7 @@ class App extends Component {
             routes = (
                 <Switch>
                     <Route path="/checkout" component={asyncCheckout}/>
+                    <Route path="/orders/:id" component={asyncOrderDetails} />
                     <Route path="/orders" component={asyncOrders}/>
                     <Route path="/" exact component={BurgerBuilder}/>
                     <Route path="/auth" component={asyncAuth}/>
@@ -59,7 +64,7 @@ class App extends Component {
     }
 }
 
-const MapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.idToken != null
     }
@@ -71,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default withRouter(connect(MapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

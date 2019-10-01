@@ -7,6 +7,7 @@ import classes from './CheckoutSummary.module.css';
 /**
  * Created by Doa on 6-8-2019.
  */
+
 const checkoutSummary = (props) => {
     return (
         <div className={classes.CheckoutSummary}>

@@ -110,7 +110,6 @@ class ContactData extends Component {
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
-        // console log(formData);
 
         const order = {
             ingredients: this.props.ings,
@@ -119,13 +118,10 @@ class ContactData extends Component {
             userId: this.props.userId
         };
 
-        // console log(order);
-
         this.props.onOrderBurger(order, this.props.token);
     };
 
     inputChangedHandler = (event, inputIdentifier) => {
-
 
         const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
             value: event.target.value,

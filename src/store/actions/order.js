@@ -48,6 +48,32 @@ export const fetchOrdersStart = () => {
     }
 };
 
+export const deleteOrderStart = () => {
+    return {
+        type: actionTypes.DELETE_ORDER_START
+    }
+};
+
+export const deleteOrderSuccess = () => {
+    return {
+        type: actionTypes.DELETE_ORDER_SUCCESS
+    }
+};
+
+export const deleteOrderFailed = (error) => {
+    return {
+        type: actionTypes.DELETE_ORDER_FAILED
+    }
+};
+
+
+// export const deleteOrder = (orderId) => {
+//     return {
+//         type: actionTypes.DELETE_ORDER,
+//         orderId: orderId
+//     }
+// };
+
 // asynchronous actionCreators
 
 export const purchaseBurger = (orderData, token) => {
@@ -94,3 +120,15 @@ export const fetchOrders = (token, userId) => {
             });
     }};
 
+export const deleteOrder = (token, orderId) => {
+    return dispatch => {
+        dispatch(deleteOrderStart());
+        axios.delete('/orders/' + orderId + '.json?auth=' + token)
+            .then(response => {
+                dispatch(deleteOrderSuccess());
+            })
+            .catch(error => {
+                dispatch(deleteOrderFailed(error));
+            });
+    };
+};

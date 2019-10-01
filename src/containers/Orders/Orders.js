@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
+
+import classes from './Orders.module.css'
 
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
@@ -20,10 +23,16 @@ class Orders extends Component {
         let orders = <Spinner/>;
         if (!this.props.loading) {
             orders = this.props.orders.map(order =>
-                <Order
-                    key={order.id}
-                    ingredients={order.ingredients}
-                    price={order.price}/>
+                <div className={classes.Orders} key={order.id} >
+                <Link
+                    to={this.props.match.url + '/' + order.id}
+                    style={{textDecoration: 'none', color: 'inherit'}}>
+                    <Order
+                        ingredients={order.ingredients}
+                        price={order.price}/>
+                </Link>
+                </div>
+
             )
         }
         return orders;
